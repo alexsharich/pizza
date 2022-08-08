@@ -4,9 +4,17 @@ import Categories from './components/Categories';
 import Sort from './components/Sort';
 import PizzaBlock from './components/PizzaBlock';
 import './scss/app.scss'
-import pizzas from './assets/pizzas.json'
+//import pizzas from './assets/pizzas.json'
 
 function App() {
+  const [pizzas,setPizzas]= React.useState([])
+
+  React.useEffect(()=>{
+    fetch('https://62ee291fa785760e6774d006.mockapi.io/pizzas')
+    .then(res=>res.json())
+    .then(pizzas=>setPizzas(pizzas))
+  },[])
+
   return (
     <div className="wrapper">
       <Header />

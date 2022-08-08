@@ -18,6 +18,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "resolutions": {
+    "browserslist": "4.6.2",
+    "caniuse-lite": "1.0.30000974"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -28,11 +32,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ],
-    "browser": {
-      "fs": false,
-      "path": false,
-      "os": false
-    }
+    ]
   }
 }
