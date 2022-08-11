@@ -1,8 +1,9 @@
 import React from "react";
 import {Link} from 'react-router-dom'
 
-function Cart(){
+function Cart (){
   return (
+    <>
     <div className="container container--cart">
      <div class="cart">
       <div class="cart__top">
@@ -118,6 +119,8 @@ function Cart(){
                     </div>
                     </div>
     </div>
+    </>
+    
   )
 }
 export default Cart

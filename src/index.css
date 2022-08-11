@@ -11,3 +11,44 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.rootNotFound {
+  display: flex;
+  align-items: center;
+}
+.iconSearchPizza {
+  width: 22px;
+  height: 22px;
+  opacity: .3;
+  position: absolute;
+  left: 14px;
+  top: 12px;
+}
+.inputSearchPizza {
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 12px 20px;
+  width: 400px;
+  border-radius: 10px;
+  padding-left: 42px;
+  font-size: 16px;
+
+  
+}
+.inputSearchPizza:focus{
+  border: 1px solid rgba(0,0,0,.2);
+} 
+.rootSearchPizza {
+  position: relative;
+  left: -120px;
+}
+.clearIconSearchPizza{
+width: 18px;
+height: 18px;
+opacity: .3;
+position: absolute;
+right: 15px;
+top: 15px;
+}
+.clearIconSearchPizza:hover{
+cursor: pointer;
+opacity: .8;
+}

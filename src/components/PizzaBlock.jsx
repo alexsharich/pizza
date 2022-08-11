@@ -6,7 +6,6 @@ function PizzaBlock({title,price,imageUrl,sizes,types}) {
   const [activeSize,setActiveSize]=React.useState(0)
   const pizzaType=['tonkaya','tradicionnaya']
   
-  console.log(sizes)
   return (
     <div className="pizza-block-wrapper">
 <div className="pizza-block">
