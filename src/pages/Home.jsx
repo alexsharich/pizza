@@ -5,10 +5,10 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import PizzaSkeleton from '../components/skeleton/PizzaSkeleton';
 import Pagination from "../components/Pagination";
+import { SearchContext } from "../App";
 
 
-
-function Home  ({searchValue}){
+function Home  (){
   const [pizzas,setPizzas]= React.useState([])
   const [isLoading,setIsLoading] = React.useState(true)
   const [categoryId, setCategoryId] = React.useState(0)
@@ -16,6 +16,8 @@ function Home  ({searchValue}){
   const [sortType,setSortType]=React.useState({
     name:'populiarosti',sortProperty:'rating'
   }) 
+
+  const {searchValue}= React.useContext(SearchContext)
 
   React.useEffect(()=>{
     setIsLoading(true)
