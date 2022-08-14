@@ -8,7 +8,7 @@ const categories = ['Все','Мясные','Вегетарианская','Гр
   return (
     <div className="categories">
       <ul>
-        {categories.map((categoryName,index)=><li onClick={()=>onChangeCategory(index)} className={value === index ? 'active':''}>{categoryName}</li>
+        {categories.map((categoryName,index)=><li key={index} onClick={()=>onChangeCategory(index)} className={value === index ? 'active':''}>{categoryName}</li>
         )}
         
       </ul>
