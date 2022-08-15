@@ -7,23 +7,33 @@ import PizzaSkeleton from '../components/skeleton/PizzaSkeleton';
 import Pagination from "../components/Pagination";
 import { SearchContext } from "../App";
 
+import { setCategoryId } from "../redux/filterSlice";
+import {useSelector,useDispatch} from 'react-redux'
 
 function Home  (){
   const [pizzas,setPizzas]= React.useState([])
   const [isLoading,setIsLoading] = React.useState(true)
-  const [categoryId, setCategoryId] = React.useState(0)
-  const [currentPage,setCurrentPage]=React.useState(1)
-  const [sortType,setSortType]=React.useState({
-    name:'populiarosti',sortProperty:'rating'
-  }) 
-
   const {searchValue}= React.useContext(SearchContext)
+  const [currentPage,setCurrentPage]=React.useState(1)
+  
+
+  const {categoryId,sort} = useSelector(state=>state.filter)
+  const sortType = sort.sortProperty
+
+  const dispatch = useDispatch()
+  
+  const onChangeCategory = (id)=>{
+    dispatch(setCategoryId(id))
+  }
+
+
+
 
   React.useEffect(()=>{
     setIsLoading(true)
 
-const order = sortType.sortProperty.includes('-') ? 'asc': 'desc'
-const sortBy =sortType.sortProperty.replace('-','')
+const order = sortType.includes('-') ? 'asc': 'desc'
+const sortBy =sortType.replace('-','')
 const category = categoryId > 0 ? `category=${categoryId}` : ''
 const search = searchValue ? `&search=${searchValue}`:''
 
@@ -51,10 +61,8 @@ const skeletons = [...new Array(6)].map((_,index)=><PizzaSkeleton  key={index}/>
       <div className="content__top">
             <Categories 
             value={categoryId}
-            onChangeCategory={(id)=>setCategoryId(id)}/>
-            <Sort 
-             value={sortType}
-             onChangeSort={(id)=>setSortType(id)}/>
+            onChangeCategory={onChangeCategory}/>
+            <Sort />
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
