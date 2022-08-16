@@ -23,9 +23,7 @@ const initialState = {
     },
     setCurrentPage:(state,action)=>{
       state.currentPage = action.payload
-    }
-  }
-})
-
-export const {setCategoryId, setSort,setCurrentPage} =  filterSlice.actions
-export default filterSlice.reducer
+    },
+    setFilters:(state,action)=>{
+      state.currentPage = Number(action.payload.currentPage)
+      state.categoryId = Nu
