@@ -14,7 +14,7 @@ const list = [
 export const Sort=() =>{
 
   const dispatch = useDispatch()
-  const sort = useSelector(state=>state.filter.sort)
+  const sort = useSelector(state=>state.filterSlice.sort)
   const [isOpen,setOpen]=React.useState(false)
  
  const onClcikListItem = (obj)=>{

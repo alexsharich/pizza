@@ -3,7 +3,7 @@ import React from "react";
 
 
 
-const Pagination = ({setCurrentPage})=>{
+const Pagination = ({changeCurrentPage})=>{
   const pages = 3
   const paginationRenderPages = []
   for (let i = 1;i<=pages;i++){
@@ -17,7 +17,7 @@ const Pagination = ({setCurrentPage})=>{
       </div>
       {
         paginationRenderPages && paginationRenderPages.map(p=>{
-          return <div key={p} onClick={()=>setCurrentPage(p)}style={{width:'30px' ,height:'30px', borderRadius:'50%',position:'relative',backgroundColor:'red',textAlign:'center',margin:'5px'}}>
+          return <div key={p} onClick={()=>changeCurrentPage(p)}style={{width:'30px' ,height:'30px', borderRadius:'50%',position:'relative',backgroundColor:'red',textAlign:'center',margin:'5px'}}>
           <p style={{color:'white'}}>{p}</p>
       </div>
         })
