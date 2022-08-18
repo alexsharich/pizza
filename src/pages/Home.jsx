@@ -72,7 +72,7 @@ const sort = list.find(obj=>obj.sortProperty === params.sortProperty)
      }
      isSearch.current = false
   },[categoryId,sortType,searchValue,currentPage])
-
+//first
 React.useEffect(()=>{
 if(isMounted.current){
   const queryString = qs.stringify({
@@ -85,16 +85,38 @@ if(isMounted.current){
 isMounted.current = true
 },[categoryId,sortType,currentPage])
 
-const filteredPizzas = pizzas
+/* const filteredPizzas = pizzas
 .filter((obj)=>{
   if(obj.title.toLowerCase().includes(searchValue.toLowerCase() )){
     return true
   }
   return false
 })
-.map(pizza=><PizzaBlock key={pizza.id}{...pizza}/>) 
+.map(obj=><PizzaBlock key={obj.id}{...obj}/>)  */
+const filteredPizzas = pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj}/>)
 const skeletons = [...new Array(6)].map((_,index)=><PizzaSkeleton  key={index}/>) 
 
   return (
     <>
-    <div
+    <div className="container">
+      <div className="content__top">
+            <Categories 
+            value={categoryId}
+            onChangeCategory={(id)=>onChangeCategory(id)}/>
+            <Sort />
+          </div>
+          <h2 className="content__title">Все пиццы</h2>
+          <div className="content__items">
+            {
+              isLoading 
+              ? skeletons 
+              : filteredPizzas
+            }
+          </div>
+          <Pagination changeCurrentPage={changeCurrentPage}/>
+    </div>
+    </>
+    
+  )
+}
+export default Home

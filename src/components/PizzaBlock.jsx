@@ -1,11 +1,31 @@
 import React from "react"
+import {useDispatch,useSelector} from 'react-redux'
+import {addItem} from '../redux/cartSlice'
 
-function PizzaBlock({title,price,imageUrl,sizes,types}) {
+const pizzaType=['tonkaya','tradicionnaya']
+
+function PizzaBlock({id,title,price,imageUrl,sizes,types,rating}) {
   
   const [activeType,setActiveType]=React.useState(0)
   const [activeSize,setActiveSize]=React.useState(0)
-  const pizzaType=['tonkaya','tradicionnaya']
-  
+
+  const cartItem = useSelector(state=>state.cartSlice.items.find(obj=>obj.id === id))
+  const dispatch = useDispatch()
+
+  const addedCount = cartItem ? cartItem.count : 0
+
+const onClickAdd = ()=>{
+  const item = {
+    id:id,
+    title:title,
+    price:price,
+    imageUrl:imageUrl,
+    type:pizzaType[activeType],
+    size:sizes[activeSize],
+  };
+  dispatch(addItem(item))
+}
+
   return (
     <div className="pizza-block-wrapper">
 <div className="pizza-block">
@@ -18,7 +38,7 @@ function PizzaBlock({title,price,imageUrl,sizes,types}) {
       <div className="pizza-block__selector">
         <ul>
           {types.map((type,index)=>(
-            <li key ={index}onClick={()=>setActiveType(type)} className={activeType === type ? 'active':''}>{pizzaType[type]}</li>
+            <li key ={index} onClick={()=>setActiveType(type)} className={activeType === type ? 'active':''}>{pizzaType[type]}</li>
           ))}
         </ul>
         <ul>
@@ -32,7 +52,7 @@ function PizzaBlock({title,price,imageUrl,sizes,types}) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">{`PRICE: ${price} BYN`}</div>
-        <button className="button button--outline button--add">
+        <button onClick={onClickAdd} className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -46,7 +66,7 @@ function PizzaBlock({title,price,imageUrl,sizes,types}) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>
