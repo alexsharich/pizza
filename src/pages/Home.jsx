@@ -8,12 +8,13 @@ import Pagination from "../components/Pagination";
 import { SearchContext } from "../App";
 import qs from 'qs'
 import  {setCategoryId,setCurrentPage,setFilters}  from "../redux/filterSlice";
+import {setItems} from '../redux/pizzaSlice'
 import {useDispatch,useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
 function Home  (){
 
-  const [pizzas,setPizzas]= React.useState([])
+/*   const [pizzas,setPizzas]= React.useState([]) */
   const [isLoading,setIsLoading] = React.useState(true)
   const {searchValue}= React.useContext(SearchContext)
   const navigate = useNavigate()
@@ -21,6 +22,8 @@ function Home  (){
   const currentPage = useSelector(state=>state.filterSlice.currentPage)
   const categoryId = useSelector(state=>state.filterSlice.categoryId)
   const sortType =useSelector(state=>state.filterSlice.sort.sortProperty)
+
+  const items = useSelector(state => state.pizza.items)
   
 const isSearch = React.useRef(false)
 const isMounted = React.useRef(false)
@@ -28,27 +31,37 @@ const isMounted = React.useRef(false)
 const changeCurrentPage = (p)=>{
   dispatch(setCurrentPage(p))
 }
+const dispatch = useDispatch()
 
-const fetchPizzas = ()=>{
+  const onChangeCategory = (id)=>{
+    dispatch(setCategoryId(id))
+  }
+
+const fetchPizzas = async ()=>{
   setIsLoading(true)
 
 const order = sortType.includes('-') ? 'asc': 'desc'
 const sortBy =sortType.replace('-','')
 const category = categoryId > 0 ? `category=${categoryId}` : ''
 const search = searchValue ? `&search=${searchValue}`:''
-    axios
-    .get(`https://62ee291fa785760e6774d006.mockapi.io/pizzas?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
-    .then(res=>{
-      setPizzas(res.data)
-      setIsLoading(false)
-    })
-    window.scrollTo(0,0)
-}
-  const dispatch = useDispatch()
 
-  const onChangeCategory = (id)=>{
-    dispatch(setCategoryId(id))
-  }
+    try {
+      const {data} = await axios.get(
+        `https://62ee291fa785760e6774d006.mockapi.io/pizzas?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+        )
+      dispatch(setItems(data))
+      
+   } catch (error) {
+    console.log('ERROR: ',error)
+    alert('some axios error')
+    } finally{
+      setIsLoading(false)
+    }
+     window.scrollTo(0,0)
+}
+
+
+  
 
 React.useEffect(()=>{
   if(window.location.search){
@@ -93,7 +106,7 @@ isMounted.current = true
   return false
 })
 .map(obj=><PizzaBlock key={obj.id}{...obj}/>)  */
-const filteredPizzas = pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj}/>)
+const filteredPizzas = items.map((obj)=><PizzaBlock key={obj.id} {...obj}/>)
 const skeletons = [...new Array(6)].map((_,index)=><PizzaSkeleton  key={index}/>) 
 
   return (
