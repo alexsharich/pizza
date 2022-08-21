@@ -6,9 +6,6 @@ function NotFoundBlock(){
     <div className="rootNotFound">
       <h1 className='rootNotFound'>Page not found </h1>
     </div>
-
-      
-
   )
 }
 export default NotFoundBlock

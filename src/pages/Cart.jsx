@@ -18,6 +18,7 @@ function Cart (){
      dispatch(clearItems())
     }
    }
+   
    if(!totalPrice){
     return <CartEmpty/>
    }

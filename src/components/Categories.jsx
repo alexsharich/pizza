@@ -2,7 +2,6 @@ import React from "react"
 
 function Categories({value,onChangeCategory}){
 
-//const [activeIndex, setActiveIndex] = React.useState(0)
 const categories = ['Все','Мясные','Вегетарианская','Гриль','Острые','Закрытые']
 
   return (
