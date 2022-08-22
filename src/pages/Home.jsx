@@ -4,12 +4,11 @@ import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import PizzaSkeleton from '../components/skeleton/PizzaSkeleton';
 import Pagination from "../components/Pagination";
-import { SearchContext } from "../App";
 import qs from 'qs'
 import  {selectFilter, setCategoryId,setCurrentPage,setFilters}  from "../redux/filterSlice";
 import {fetchPizzas, selectPizzaData} from '../redux/pizzaSlice'
 import {useDispatch,useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,Link} from 'react-router-dom'
 
 function Home  (){
 
@@ -94,7 +93,9 @@ React.useEffect(()=>{
 getPizzas()
 },[categoryId,sort.sortProperty,searchValue,currentPage])
 
-const filteredPizzas = items.map((obj)=><PizzaBlock key={obj.id} {...obj}/>)
+const filteredPizzas = items.map((obj)=><Link key={obj.id} to={`/pizza/${obj.id}`}>
+  <PizzaBlock  {...obj}/>
+  </Link>)
 const skeletons = [...new Array(6)].map((_,index)=><PizzaSkeleton  key={index}/>) 
 
   return (
