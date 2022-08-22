@@ -1,23 +1,22 @@
 import React from "react";
-import { SearchContext } from "../../App";
+import { setSearchValue } from "../../redux/filterSlice";
 import debounce from "lodash.debounce";
+import { useDispatch } from "react-redux";
 
 
 const SearchPizza = () =>{
 
+  const dispatch = useDispatch()
   const [value, setValue]=React.useState('')
-
+  const inputRef = React.useRef()
 
   const updateSearchValue = React.useCallback(
     debounce((str)=>{
-      setSearchValue(str)
+      dispatch(setSearchValue(str))
     },1000),[])
-  
-  const {setSearchValue}= React.useContext(SearchContext)
-  const inputRef = React.useRef()
 
   const onClickCloseClear = ()=>{
-    setSearchValue('')
+    dispatch(setSearchValue(''))
     setValue('')
     inputRef.current.focus()
   }

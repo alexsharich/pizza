@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch ,useSelector} from "react-redux"
-import {setSort} from '../redux/filterSlice'
+import {selectSort, setSort} from '../redux/filterSlice'
 
 export const list = [
   {name:'populyarnosti (DESC)',sortProperty:'rating'},
@@ -14,9 +14,11 @@ export const list = [
 export const Sort=() =>{
 
   const dispatch = useDispatch()
-  const sort = useSelector(state=>state.filterSlice.sort)
+  const sort = useSelector(selectSort)
+  const sortRef = React.useRef()
+  
   const [isOpen,setOpen]=React.useState(false)
- const sortRef = React.useRef()
+
 
  const onClcikListItem = (obj)=>{
  dispatch(setSort(obj))

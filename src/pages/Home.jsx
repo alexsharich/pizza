@@ -1,5 +1,4 @@
 import React from "react";
-import axios from 'axios'
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
@@ -7,19 +6,18 @@ import PizzaSkeleton from '../components/skeleton/PizzaSkeleton';
 import Pagination from "../components/Pagination";
 import { SearchContext } from "../App";
 import qs from 'qs'
-import  {setCategoryId,setCurrentPage,setFilters}  from "../redux/filterSlice";
-import {fetchPizzas} from '../redux/pizzaSlice'
+import  {selectFilter, setCategoryId,setCurrentPage,setFilters}  from "../redux/filterSlice";
+import {fetchPizzas, selectPizzaData} from '../redux/pizzaSlice'
 import {useDispatch,useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
 function Home  (){
 
-  const {searchValue}= React.useContext(SearchContext)
   const navigate = useNavigate()
-  
-  const {currentPage,sort,categoryId} = useSelector(state=>state.filterSlice)
-   
-  const {items,status} = useSelector(state => state.pizza)
+  const dispatch = useDispatch()
+
+  const {categoryId,sort,currentPage,searchValue} = useSelector(selectFilter)
+  const {items,status} = useSelector(selectPizzaData)
   
 const isSearch = React.useRef(false)
 const isMounted = React.useRef(false)
@@ -27,7 +25,7 @@ const isMounted = React.useRef(false)
 const changeCurrentPage = (p)=>{
   dispatch(setCurrentPage(p))
 }
-const dispatch = useDispatch()
+
 
   const onChangeCategory = (id)=>{
     dispatch(setCategoryId(id))
