@@ -2,9 +2,13 @@ import axios from "axios";
 import React from "react";
 import {useParams,useNavigate} from 'react-router-dom'
 
- const FullPizza = ()=>{
+ const FullPizza: React.FC = () =>{
   
-  const [pizza,setPizza] = React.useState()
+  const [pizza,setPizza] = React.useState<{
+    imageUrl:string,
+    title:string,
+    price:number
+  }>()
   const {id} = useParams()
   const navigate = useNavigate()
 
@@ -22,15 +26,14 @@ React.useEffect(()=>{
 },[])
 
 if(!pizza){
-  return 'Please, wait ...'
+  return <>'Please, wait ...'</>
 }
 
   return (
     <div className="container">
-     
-     <img src={pizza.imageUrl} />
-      <h2>{pizza.title}</h2>
-      <h4>{pizza.price}</h4>
+        <img src={pizza.imageUrl} />
+        <h2>{pizza.title}</h2>
+        <h4>{pizza.price}</h4>
     </div>
   )
 }
