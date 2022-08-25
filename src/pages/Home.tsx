@@ -10,7 +10,7 @@ import {fetchPizzas, selectPizzaData} from '../redux/pizzaSlice'
 import {useDispatch,useSelector} from 'react-redux'
 import {useNavigate,Link} from 'react-router-dom'
 
-function Home  (){
+const Home : React.FC = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -21,12 +21,12 @@ function Home  (){
 const isSearch = React.useRef(false)
 const isMounted = React.useRef(false)
 
-const changeCurrentPage = (p)=>{
+const changeCurrentPage = (p : number)=>{
   dispatch(setCurrentPage(p))
 }
 
 
-  const onChangeCategory = (id)=>{
+  const onChangeCategory = (id : number)=>{
     dispatch(setCategoryId(id))
   }
 
@@ -38,6 +38,7 @@ const category = categoryId > 0 ? `category=${categoryId}` : ''
 const search = searchValue ? `&search=${searchValue}`:''
 
 dispatch(
+  //@ts-ignore
   fetchPizzas({
     order,
     sortBy,
@@ -93,7 +94,7 @@ React.useEffect(()=>{
 getPizzas()
 },[categoryId,sort.sortProperty,searchValue,currentPage])
 
-const filteredPizzas = items.map((obj)=><Link key={obj.id} to={`/pizza/${obj.id}`}>
+const filteredPizzas = items.map((obj : any)=><Link key={obj.id} to={`/pizza/${obj.id}`}>
   <PizzaBlock  {...obj}/>
   </Link>)
 const skeletons = [...new Array(6)].map((_,index)=><PizzaSkeleton  key={index}/>) 

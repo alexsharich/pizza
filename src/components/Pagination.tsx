@@ -1,6 +1,10 @@
 import React from "react";
 
-const Pagination = ({changeCurrentPage})=>{
+type PaginationPropsType = {
+  changeCurrentPage:(p:number)=>void
+}
+
+const Pagination : React.FC<PaginationPropsType> = ({changeCurrentPage})=>{
   const pages = 3
   const paginationRenderPages = []
   for (let i = 1;i<=pages;i++){
