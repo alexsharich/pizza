@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { setSearchValue } from "../../redux/filterSlice";
 import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
@@ -21,7 +21,7 @@ const SearchPizza : React.FC = () =>{
     inputRef.current?.focus() 
   }
 
-  const onChangeInput = (event:any)=>{
+  const onChangeInput = (event : ChangeEvent<HTMLInputElement>)=>{
     setValue(event.target.value)
     updateSearchValue(event.target.value)
   }

@@ -2,17 +2,17 @@ import React from "react"
 
 type CategoriesPropsType = {
   value: number
-  onChangeCategory: (index:number) => void
+  onChangeCategory: (index : number) => void
 }
 
-const Categories : React.FC<CategoriesPropsType> = ({value,onChangeCategory})=>{
-
 const categories = ['Все','Мясные','Вегетарианская','Гриль','Острые','Закрытые']
+
+const Categories : React.FC<CategoriesPropsType> = ({value,onChangeCategory})=>{
 
   return (
     <div className="categories">
       <ul>
-        {categories.map((categoryName,index)=><li key={index} onClick={()=>onChangeCategory(index)} className={value === index ? 'active':''}>{categoryName}</li>
+          {categories.map((categoryName,index)=><li key={index} onClick={()=>onChangeCategory(index)} className={value === index ? 'active':''}>{categoryName}</li>
         )}        
       </ul>
     </div>
