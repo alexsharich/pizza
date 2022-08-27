@@ -230,6 +230,26 @@ body {
             display: none;
           }
         }
+        &--disabled {
+          opacity:0.4;
+          border-color: grey;
+
+          &:active {
+            transform: none;
+          }
+
+          &:hover {
+            background-color: transparent;
+            
+            svg path {
+              fill: grey;
+            }
+          }
+
+          svg path {
+            fill: grey;
+          }
+        }
       }
 
       b {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
@@ -26,9 +26,9 @@ const changeCurrentPage = (p : number)=>{
   dispatch(setCurrentPage(p))
 }
 
-  const onChangeCategory = (id : number)=>{
+  const onChangeCategory = useCallback((id : number)=>{
     dispatch(setCategoryId(id))
-  }
+  },[])
 
 const getPizzas = async ()=>{
 
@@ -108,7 +108,7 @@ const skeletons = [...new Array(6)].map((_,index)=><PizzaSkeleton  key={index}/>
             <Categories 
             value={categoryId}
             onChangeCategory={(id)=>onChangeCategory(id)}/>
-            <Sort />
+            <Sort value={sort}/>
           </div>
           <h2 className="content__title">Все пиццы</h2>
           {

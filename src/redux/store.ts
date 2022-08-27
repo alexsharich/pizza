@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+git import { configureStore } from '@reduxjs/toolkit'
 import filterSlice from './filterSlice'
 import cartSlice from './cartSlice'
 import pizza from './pizzaSlice'

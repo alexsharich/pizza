@@ -23,7 +23,7 @@ const location = useLocation()
           </div>
         </div>
 </Link>
-        <SearchPizza />
+        {location.pathname !== '/cart' && <SearchPizza />}
         <div className="header__cart">
        {location.pathname !== '/cart' && (
           <Link to="/cart" className="button button--cart">
